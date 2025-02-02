@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CodeCapture📸</title>
+<style>
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+#screenshot-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px;
+}
+
+#screenshot-button:hover {
+    background-color: #45a049;
+}
+
+#screenshot-button:active {
+    background-color: #3e8e41;
+}
+
+#screenshot-canvas {
+    border: 2px dashed #ccc;
+    cursor: crosshair;
+}
+
+#cropped-image {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+}
+
+#extracted-text-container, #processed-text-container {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    width: 80%;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#extracted-text-container h2, #processed-text-container h2 {
+    margin-top: 0;
+}
+
+#extracted-text, #processed-text {
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+</style>
+</head>
+<body>
+
+<button id="screenshot-button">Take Screenshot</button>
+<canvas id="screenshot-canvas"></canvas>
+<img id="cropped-image" style="display:none;">
+
+<div id="extracted-text-container">
+    <h2>Raw Text</h2>
+    <div id="extracted-text"></div>
+</div>
+
+<div id="processed-text-container">
+    <h2>Processed Text</h2>
+    <div id="processed-text"></div>
+</div>
+
+<script src="./index.js" type="module"></script>
+
+</body>
+</html>
