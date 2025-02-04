@@ -24,7 +24,7 @@ A web application that captures screenshots, performs Optical Character Recognit
 3.  Install dependencies: `npm install openai tesseract.js parcel --save-dev`
 4.  *Make sure to replace YOUR_OPENAI_APIKEY with your actual key (DO NOT EXPOSE YOUR KEY, research ways to make it secure)*
 5.  Run Parcel: `npx parcel index.html --no-source-maps`
-6.  Open `index.html` in your browser.
+6.  Open `index.html` in your browser or to to localhost where server is running ex.`http://localhost:1234`.
 
 ## How to Use
 

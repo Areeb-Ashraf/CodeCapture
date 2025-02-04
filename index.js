@@ -12,6 +12,7 @@ const ctx = canvas.getContext('2d');
 const croppedImage = document.getElementById('cropped-image');
 const extractedTextDiv = document.getElementById('extracted-text');
 const processedTextDiv = document.getElementById('processed-text');
+const croppingRect = document.getElementById('cropping-rect'); // Get the rectangle element
 
 let isCropping = false;
 let startX, startY, endX, endY;
@@ -56,6 +57,13 @@ function startCrop(e) {
 
     startX = e.offsetX;
     startY = e.offsetY;
+
+    // Set initial position and size of the rectangle
+    croppingRect.style.left = startX + 'px';
+    croppingRect.style.top = startY + 'px';
+    croppingRect.style.width = '0px';
+    croppingRect.style.height = '0px';
+    croppingRect.style.display = 'block'; // Make it visible
 }
 
 function endCrop(e) {
@@ -71,6 +79,8 @@ function endCrop(e) {
     const x = Math.min(startX, endX);
     const y = Math.min(startY, endY);
 
+    croppingRect.style.display = 'none'; // Hide the rectangle
+
     if (width > 0 && height > 0) {
         const croppedCanvas = document.createElement('canvas');
         croppedCanvas.width = width;
@@ -80,15 +90,6 @@ function endCrop(e) {
 
         const dataURL = croppedCanvas.toDataURL('image/png');
 
-        // // Download screenshot
-        // const a = document.createElement('a');
-        // a.href = dataURL;
-        // a.download = 'screenshot.png';
-        // document.body.appendChild(a);
-        // a.click();
-        // document.body.removeChild(a);
-
-        // 
         croppedImage.src = dataURL;
         croppedImage.style.display = 'block';
 
@@ -133,3 +134,16 @@ function endCrop(e) {
 
     ctx.drawImage(canvas, 0, 0);
 }
+
+canvas.addEventListener('mousemove', (e) => {
+    if (isCropping) {
+        endX = e.offsetX;
+        endY = e.offsetY;
+
+        // Update rectangle position and size
+        croppingRect.style.left = Math.min(startX, endX) + canvas.offsetLeft + 'px';
+        croppingRect.style.top = Math.min(startY, endY) + canvas.offsetTop + 'px';
+        croppingRect.style.width = Math.abs(endX - startX) + 'px';
+        croppingRect.style.height = Math.abs(endY - startY) + 'px';
+    }
+});
